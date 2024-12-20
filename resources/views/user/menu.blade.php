@@ -3,7 +3,7 @@
 @section('header')
     <style>
         #hero {
-            background: url('{{asset('user/images/cover.png')}}') top center;
+            background: url('{{ asset('user/images/cover.png') }}') top center;
             background-attachment: fixed; /* Keeps the image still while scrolling */
             background-repeat: no-repeat;
             width: 100%;
@@ -66,7 +66,7 @@
             background-color: #2980b9;
         }
 
-        .no-suvenir {
+        .no-menu {
             background-color: #f9e38f; /* Yellow background */
             text-align: center;
             font-size: 18px;
@@ -76,52 +76,46 @@
             border-radius: 10px;
         }
 
-        .no-suvenir p {
+        .no-menu p {
             font-weight: bold;
         }
     </style>
 @endsection
 
 @section('hero')
-    <h1>Daftar Suvenir Kami</h1>
-    <h2>Asik</h2>
+    <h1>Menu {{ $tenant->title }}</h1>
 @endsection
 
 @section('content')
-    <!-- WhatsApp Floating Icon -->
-    <a href="https://api.whatsapp.com/send?phone=6282139003999" target="_blank" class="whatsapp-icon">
-        <i class="fa fa-whatsapp"></i>
-    </a>
-
-    <!-- Souvenir Cards Section -->
-    <section id="suvenirs">
+    <!-- Menu Cards Section -->
+    <section id="menus">
         <div class="container wow fadeIn">
             <div class="section-header">
-                <h3 class="section-title">Suvenir Kami</h3>
-                <p class="section-description">Temukan berbagai suvenir menarik kami di bawah ini:</p>
+                <h3 class="section-title mt-5">Menu Kami</h3>
+                <p class="section-description">Temukan berbagai menu menarik kami di bawah ini:</p>
             </div>
 
-            @if($suvenirs->isEmpty())
-              <div class="alert alert-warning">
-                Tidak ada suvenir yang tersedia saat ini.
-              </div>
+            @if($menus->isEmpty())
+                <div class="alert alert-warning">
+                    Tidak ada menu yang tersedia saat ini.
+                </div>
             @else
                 <div class="card-container">
-                    @foreach($suvenirs as $suvenir)
-                    <div class="card">
-                        <img src="{{ asset('suvenirs_image/' . $suvenir->image) }}" alt="{{ $suvenir->name }}">
-                        <h5>{{ $suvenir->name }}</h5>
-                        <p>{!! $suvenir->short_description !!}</p>
-                        <div class="price">Rp {{ number_format($suvenir->price, 0, ',', '.') }}</div>
-                    </div>
+                    @foreach($menus as $menu)
+                        <div class="card">
+                            @if ($menu->image)
+                                <img src="{{ asset('menus_image/' . $menu->image) }}" alt="{{ $menu->name }}">
+                            @else
+                                <img src="https://via.placeholder.com/400x300" alt="Menu Image">
+                            @endif
+                            <h5>{{ $menu->name }}</h5>
+                            <p>{!! $menu->description !!}</p>
+                            <div class="price">Rp {{ number_format($menu->price, 0, ',', '.') }}</div>
+
+                        </div>
                     @endforeach
                 </div>
             @endif
-
-            <!-- Pagination Section -->
-            <div class="pagination">
-                {{ $suvenirs->links() }}
-            </div>
         </div>
     </section>
 @endsection

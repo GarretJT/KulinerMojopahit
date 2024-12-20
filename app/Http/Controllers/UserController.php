@@ -9,6 +9,9 @@ use App\About;
 use App\Article;
 use App\Destination;
 use App\Suvenir;
+use App\Menu;
+use App\Gallery;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -21,12 +24,18 @@ class UserController extends Controller
   
   public function home()
   {
-    $data = [
-      'categories'    => Category::all(),
-      'about'         => About::all()
-    ];
-    return view('user/home', $data);
+      $data = [
+          'categories' => Category::all(),
+          'about'      => About::all(),
+          'galleries'  => Gallery::all() // Add galleries here
+      ];
+  
+      // Log the data for debugging
+      Log::info('Gallery Data:', $data['galleries']->toArray());
+  
+      return view('user.home', $data);
   }
+  
 
   public function blog(Request $request){
 
@@ -111,5 +120,16 @@ public function show_suvenir($id)
     return view('user.suvenir-detail', compact('suvenir'));
 }
   
+public function showTenantMenus($slug)
+{
+    // Find the tenant by slug (or use ID if preferred)
+    $tenant = Destination::where('slug', $slug)->firstOrFail();
+
+    // Fetch the menus associated with this tenant
+    $menus = Menu::where('tenant_id', $tenant->id)->get();
+
+    return view('user.menu', compact('tenant', 'menus'));
+}
+
 
 }

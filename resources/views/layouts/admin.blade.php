@@ -33,33 +33,54 @@
     @endphp
 
     <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="{{$url=='dashboard'?'active':''}}">
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Dashboard Section -->
+                <li class="menu-title">Dashboard</li>
+                <li class="{{$url=='dashboard'?'active':''}}">
                     <a href="{{url('admin/dashboard')}}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
-                    </li>
-                    <li class="{{$url=='categories'?'active':''}}">
-                        <a href="{{url('admin/categories')}}"><i class="menu-icon fa fa-list-ul"></i>Categories </a>
-                    </li>
-                    <li class="{{$url=='articles'?'active':''}}">
-                        <a href="{{url('admin/articles')}}"> <i class="menu-icon fa fa-newspaper-o"></i> Artikel</a>
-                    </li>
-                    <li class="{{$url=='destinations'?'active':''}}">
-                        <a href="{{url('admin/destinations')}}"><i class="menu-icon fa fa-paper-plane-o"></i>Tenant </a>
-                    </li>
-                    <li class="{{$url=='abouts'?'active':''}}">
-                        <a href="{{url('admin/abouts')}}"><i class="menu-icon fa fa-user"></i>Tentang Kami </a>
-                    </li>
-                    <li class="{{$url=='suvenir'?'active':''}}">
-                        <a href="{{url('admin/suvenirs')}}"><i class="menu-icon fa fa-laptop"></i>Suvenir </a>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside>
-    <!-- /#left-panel -->
+                </li>
+
+                <!-- Tentang Kami Section -->
+                <li class="menu-title">Home Page</li>
+                <li class="{{$url=='abouts'?'active':''}}">
+                    <a href="{{url('admin/abouts')}}"><i class="menu-icon fa fa-user"></i>Tentang Kami </a>
+                </li>
+                <li class="{{$url=='gallery'?'active':''}}">
+                    <a href="{{url('admin/gallery')}}"><i class="menu-icon fa fa-user"></i>Gallery </a>
+                </li>
+
+                <!-- Artikel & Categories Section -->
+                <li class="menu-title">Artikel & Categories</li>
+                <li class="{{$url=='articles'?'active':''}}">
+                    <a href="{{url('admin/articles')}}"><i class="menu-icon fa fa-newspaper-o"></i>Artikel </a>
+                </li>
+                <li class="{{$url=='categories'?'active':''}}">
+                    <a href="{{url('admin/categories')}}"><i class="menu-icon fa fa-list-ul"></i>Categories </a>
+                </li>
+
+                <!-- Tenant & Menu Section -->
+                <li class="menu-title">Tenant & Menu</li>
+                <li class="{{$url=='destinations'?'active':''}}">
+                    <a href="{{url('admin/destinations')}}"><i class="menu-icon fa fa-paper-plane-o"></i>Tenant </a>
+                </li>
+                <li class="{{$url=='menu'?'active':''}}">
+                    <a href="{{url('admin/menu')}}"><i class="menu-icon fa fa-bars"></i>Menu </a>
+                </li>
+
+                <!-- Suvenir Section -->
+                <li class="menu-title">Suvenir</li>
+                <li class="{{$url=='suvenir'?'active':''}}">
+                    <a href="{{url('admin/suvenirs')}}"><i class="menu-icon fa fa-laptop"></i>Suvenir </a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside>
+<!-- /#left-panel -->
+
 
 
     <!-- Right Panel -->
@@ -135,6 +156,9 @@
                 <div class="animated fadeIn">
                     
                     @yield('content')
+            
+        </footer>
+        <!-- /.site-footer -->
                     
                 </div>
                 <!-- .animated -->
@@ -142,19 +166,6 @@
         <!-- /.content -->
         <div class="clearfix"></div>
         <!-- Footer -->
-        <footer class="site-footer">
-            <div class="footer-inner bg-white">
-                <div class="row">
-                    <div class="col-sm-6">
-                        Copyright &copy; 2018 Ela Admin
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        Designed by <a href="https://colorlib.com">Colorlib</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- /.site-footer -->
     </div>
     <!-- /#right-panel -->
 

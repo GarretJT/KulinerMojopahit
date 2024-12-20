@@ -135,11 +135,17 @@ class ArticleController extends Controller
    */
   public function destroy($id)
   {
-    $article = \App\Article::findOrFail($id);
-    $article->forceDelete();
-
-    return redirect()->route('articles.index')->with('success', 'Article permanenly delete');
+      $article = \App\Article::findOrFail($id);
+  
+      // Remove related categories first
+      $article->categories()->detach();
+  
+      // Now, delete the article
+      $article->forceDelete();
+  
+      return redirect()->route('articles.index')->with('success', 'Article permanently deleted');
   }
+  
 
   public function upload(Request $request){
     if($request->hasFile('upload')) {

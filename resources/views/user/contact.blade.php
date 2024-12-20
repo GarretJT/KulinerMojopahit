@@ -31,7 +31,7 @@
 <section id="google-maps">
   <div class="container wow fadeIn">
     <div class="section-header">
-      <h3 class="section-title">Lokasi Kami</h3>
+      <h3 class="section-title mt-4">Lokasi Kami</h3>
       <p class="section-description">Temukan kami di alamat berikut:</p>
     </div>
     <div class="row">
@@ -54,24 +54,29 @@
 
     <!-- Additional Information Section -->
     <div class="row mt-4 justify-content-center">
-      <div class="col-md-6">
-        <div class="location-info text-center">
-          <div class="location-item mb-3">
-            <i class="fa fa-map-marker" style="font-size: 24px;"></i> 
-            <span>Maha Vihara Majapahit, Bejijong, Trowulan, Mojokerto Regency, East Java 61362</span>
-          </div>
-          <div class="location-item mb-3">
-            <i class="fa fa-phone" style="font-size: 24px;"></i>
-            <span>+62 123-456-789</span>
-          </div>
-          <div class="location-item">
-            <i class="fa fa-envelope" style="font-size: 24px;"></i>
-            <span>kulinermojopahit@gmail.com</span>
-          </div>
-        </div>
+  <div class="col-md-6">
+    <div class="location-info text-center">
+      <!-- Address -->
+      <div class="location-item mb-3">
+        <i class="fa fa-map-marker" style="font-size: 30px; color: #3498db;"></i>
+        <span class="ml-3" style="font-size: 16px; color: #555;">Maha Vihara Majapahit, Bejijong, Trowulan, Mojokerto Regency, East Java 61362</span>
+      </div>
+      
+      <!-- Phone -->
+      <div class="location-item mb-3">
+        <i class="fa fa-phone" style="font-size: 30px; color: #3498db;"></i>
+        <span class="ml-3" style="font-size: 16px; color: #555;">+62 123-456-789</span>
+      </div>
+      
+      <!-- Email -->
+      <div class="location-item mb-3">
+        <i class="fa fa-envelope" style="font-size: 30px; color: #3498db;"></i>
+        <span class="ml-3" style="font-size: 16px; color: #555;">kulinermojopahit@gmail.com</span>
       </div>
     </div>
   </div>
+</div>
+
 </section><!-- #google-maps -->
 
     <!-- <div class="container wow fadeInUp">

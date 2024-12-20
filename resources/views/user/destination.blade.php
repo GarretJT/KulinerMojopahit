@@ -117,51 +117,62 @@
             </div>
         </div>
         <div class="row">
-            @if (empty($destinations) || $destinations->isEmpty())
-                <div class="alert alert-warning col-md-12">
-                    Tidak ada artikel yang tersedia saat ini.
-                </div>
-            @else
-                @if (empty(request()->segment(2)))
-                    @foreach ($destinations as $destination)
-                        <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
-                            <div class="card">
-                                @if ($destination->image)
-                                    <img src="{{ asset('destinations_image/' . $destination->image) }}"
-                                        alt="{{ $destination->title }}" class="card-img-top"
-                                        style="height: 200px; object-fit: cover;">
-                                @else
-                                    <img src="https://via.placeholder.com/300x200" alt="Article Image" class="card-img-top"
-                                        style="height: 200px; object-fit: cover;">
-                                @endif
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $destination->title }}</h5>
-                                    <div class="card-text">
-                                        @php
-                                            $content = preg_replace([
-                                                '/<a[^>]*><img[^>]*><\/a>/i', // Remove <a> tags containing <img>
-                                                '/<img[^>]*>/i',              // Remove standalone <img> tags
-                                                '/<p.*?>(.*?)<\/p>/si'        // Extract text inside <p> tags
-                                            ], [
-                                                '', // Replace <a> with <img> with nothing
-                                                '', // Replace <img> with nothing
-                                                '$1' // Extract only content inside <p>
-                                            ], $destination->content);
-                                        @endphp
-                                        <p>{!! Str::limit($content, 725, ' . . .') !!}</p>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <a href="/destination/{{ $destination->slug }}">Baca Detail</a>
+        @if ($destinations->isEmpty())
+            <div class="alert alert-warning col-md-12">
+                Tidak ada artikel yang tersedia saat ini.
+            </div>
+        @else
+            @if (empty(request()->segment(2)))
+                @foreach ($destinations as $destination)
+                    <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
+                        <div class="card">
+                            @if ($destination->image)
+                                <img src="{{ asset('destinations_image/' . $destination->image) }}"
+                                    alt="{{ $destination->title }}" class="card-img-top"
+                                    style="height: 200px; object-fit: cover;">
+                            @else
+                                <img src="https://via.placeholder.com/300x200" alt="Article Image" class="card-img-top"
+                                    style="height: 200px; object-fit: cover;">
+                            @endif
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $destination->title }}</h5>
+                                <div class="card-text">
+                                    @php
+                                        // First, we remove <a> tags containing <img> and standalone <img> tags
+                                        $content = preg_replace([
+                                            '/<a[^>]*><img[^>]*><\/a>/i',  // Remove <a> tags containing <img> tags
+                                            '/<img[^>]*>/i'                 // Remove standalone <img> tags
+                                        ], [
+                                            '', // Remove <a> with <img> entirely
+                                            ''  // Remove <img> tags
+                                        ], $destination->content);
+
+                                        // Now, extract only the text content inside <p> tags
+                                        // We'll strip all other HTML and keep just the text
+                                        $content = strip_tags($content, '<p>'); // Preserve <p> tags but strip all others
+
+                                        // Remove any leftover stray characters, including '<'
+                                        $content = preg_replace('/<[^>]*>/i', '', $content);
+
+                                        // Limit the content to 725 characters
+                                        $content = Str::limit($content, 725, ' . . .');
+                                    @endphp
+                                    <p>{!! $content !!}</p>
                                 </div>
                             </div>
-                        </div> 
-                    @endforeach   
-                @else
-                    @component('user.component.single_destination', ['destination'=> $destinations])
-                    @endcomponent
-                @endif
+
+                            <div class="card-footer">
+                                <a href="{{ route('destination.menu', $destination->slug) }}" class="btn btn-primary" style="color: white;">Lihat Menu</a>
+                            </div>
+
+                        </div>
+                    </div> 
+                @endforeach   
+            @else
+                @component('user.component.single_destination', ['destination'=> $destinations])
+                @endcomponent
             @endif
+        @endif
         </div>
     </section>
 @endsection
